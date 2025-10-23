@@ -26,10 +26,13 @@ echo "5. Chat (console)"
 echo "6. Chat (streamlit)"
 echo "7. Run full pipeline"
 echo "8. Demo chatbot"
-echo "9. Exit"
+echo "9. Train intent classifier"
+echo "10. Demo hybrid chatbot"
+echo "11. Run with ngrok tunnel"
+echo "12. Exit"
 echo ""
 
-read -p "Masukkan pilihan (1-9): " choice
+read -p "Masukkan pilihan (1-12): " choice
 
 case $choice in
     1)
@@ -65,12 +68,24 @@ case $choice in
         python demo_chat.py
         ;;
     9)
+        echo "🧠 Training intent classifier..."
+        python main.py intent-train
+        ;;
+    10)
+        echo "🤖 Running hybrid chatbot demo..."
+        python hybrid_chatbot.py
+        ;;
+    11)
+        echo "🌐 Running with ngrok tunnel..."
+        python ngrok_simple.py
+        ;;
+    12)
         echo "👋 Goodbye!"
         exit 0
         ;;
     *)
         echo "❌ Pilihan tidak valid!"
-        echo "   Pilihan yang tersedia: 1-9"
+        echo "   Pilihan yang tersedia: 1-12"
         exit 1
         ;;
 esac

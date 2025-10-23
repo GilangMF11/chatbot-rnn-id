@@ -57,7 +57,7 @@ def run_chatbot_interface(interface_type: str = "console"):
     try:
         if interface_type == "streamlit":
             # Run Streamlit app
-            subprocess.run([sys.executable, "-m", "streamlit", "run", "chatbot_interface.py", "--", "streamlit"])
+            subprocess.run([sys.executable, "-m", "streamlit", "run", "streamlit_demo.py"])
         else:
             # Run console interface
             import chatbot_interface
@@ -65,6 +65,33 @@ def run_chatbot_interface(interface_type: str = "console"):
         return True
     except Exception as e:
         print(f"❌ Error in chatbot interface: {str(e)}")
+        return False
+
+def run_intent_classifier():
+    """Jalankan intent classifier training"""
+    print("🔄 Training intent classifier...")
+    try:
+        import intent_classifier
+        classifier = intent_classifier.train_intent_classifier()
+        if classifier:
+            print("✅ Intent classifier training completed!")
+            return True
+        else:
+            print("❌ Intent classifier training failed!")
+            return False
+    except Exception as e:
+        print(f"❌ Error in intent classifier: {str(e)}")
+        return False
+
+def run_intent_chatbot():
+    """Jalankan intent-based chatbot"""
+    print("🔄 Starting intent-based chatbot...")
+    try:
+        import intent_chatbot
+        intent_chatbot.demo_intent_chatbot()
+        return True
+    except Exception as e:
+        print(f"❌ Error in intent chatbot: {str(e)}")
         return False
 
 def check_dependencies():
@@ -97,7 +124,7 @@ def main():
     parser = argparse.ArgumentParser(description="Chatbot RNN Bahasa Indonesia")
     parser.add_argument(
         "command", 
-        choices=["preprocess", "prepare", "train", "chat", "streamlit", "full", "check"],
+        choices=["preprocess", "prepare", "train", "chat", "streamlit", "full", "check", "intent-train", "intent-chat"],
         help="Command to run"
     )
     parser.add_argument(
@@ -134,6 +161,14 @@ def main():
     
     elif args.command == "streamlit":
         success = run_chatbot_interface("streamlit")
+        sys.exit(0 if success else 1)
+    
+    elif args.command == "intent-train":
+        success = run_intent_classifier()
+        sys.exit(0 if success else 1)
+    
+    elif args.command == "intent-chat":
+        success = run_intent_chatbot()
         sys.exit(0 if success else 1)
     
     elif args.command == "full":

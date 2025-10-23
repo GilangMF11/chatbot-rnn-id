@@ -1,6 +1,6 @@
 # 🤖 Chatbot RNN Bahasa Indonesia
 
-Chatbot berbasis Recurrent Neural Network (RNN) untuk bahasa Indonesia yang menggunakan dataset lengkap termasuk corpus, sentiment, dan entities.
+Chatbot berbasis Recurrent Neural Network (RNN) untuk bahasa Indonesia yang menggunakan dataset lengkap termasuk corpus, sentiment, dan entities. Menggunakan **Hybrid Approach** yang menggabungkan Intent Classification dan RNN untuk performa optimal.
 
 ## 📊 Dataset yang Digunakan
 
@@ -96,6 +96,12 @@ python main.py chat
 
 ## 🔧 Features
 
+### Hybrid Approach
+- ✅ **Intent Classification**: Untuk dialog terstruktur (accuracy ~57%)
+- ✅ **RNN Fallback**: Untuk general conversation
+- ✅ **Smart Routing**: Otomatis pilih model terbaik
+- ✅ **Best Performance**: Menggabungkan kelebihan kedua approach
+
 ### Text Preprocessing
 - ✅ Normalization (slang → formal)
 - ✅ Stopword removal
@@ -107,6 +113,13 @@ python main.py chat
 - ✅ Multiple model architectures
 - ✅ Optimized hyperparameters
 - ✅ Advanced text generation
+
+### Interface Features
+- ✅ **Streamlit Web UI**: Modern web interface
+- ✅ **Model Selection**: Pilih jenis chatbot (Hybrid/Intent/RNN)
+- ✅ **Real-time Chat**: Interactive conversation
+- ✅ **Statistics**: Performance metrics dan conversation stats
+- ✅ **Quick Test**: Test dengan input yang sudah ditentukan
 
 ### Interface Options
 - ✅ Console interface
@@ -171,9 +184,34 @@ python main.py train
 python main.py chat
 ```
 
-### 3. Web Interface
+### 3. Hybrid Approach
 ```bash
+# Train intent classifier
+python main.py intent-train
+
+# Demo hybrid chatbot
+python main.py intent-chat
+
+# Or use hybrid chatbot directly
+python hybrid_chatbot.py
+```
+
+### 4. Web Interface (Recommended)
+```bash
+# Modern Streamlit interface
 python main.py streamlit
+
+# Or directly
+streamlit run streamlit_app.py
+```
+
+### 5. Quick Demo
+```bash
+# Non-interactive demo
+python demo_chat.py
+
+# Hybrid chatbot demo
+python hybrid_chatbot.py
 ```
 
 ## 🎯 Optimizations Applied
